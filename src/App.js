@@ -16,22 +16,31 @@ function App() {
         </section>
 
   		  <section class="container">
-          <form id="frmLoginDos" action="" method="get" class="pt-5" autocomplete="off">			
-            <div class="form-floating w-50 m-auto">
-              <input type="email" name="correo" id="correo" placeholder="x" required="" class="form-control form-control-lg fs-3 fw-bolder text-center"/>
-              <label for="correo">Introduce tu correo</label>
-              <div class="invalid-feedback">
-                No pudimos encontrar ese correo electr&oacute;nico 
+          <h1>Ingresa tus datos para crear una cuenta de cliente</h1>
+          <form id="frmLoginDos" action="void" class="pt-5" autocomplete="off">
+            <fieldset>
+              <legend>
+                Datos personales
+              </legend>
+              <div class="form-floating w-75 mb-3 m-auto">
+                <input type="text" name="nombre" id="nombre" placeholder="x" required="true" 
+                  class="form-control form-control-lg fs-3 fw-bolder text-center"/>
+                <label for="nombre">Introduce tu nombre completo</label>
               </div>
-            </div>
 
-            <div class="form-floating w-50 m-auto mt-3">
-              <input type="password" name="pwd" id="pwd" placeholder="x" required="" class="form-control form-control-lg fs-3 fw-bolder text-center"/>
-              <label for="pwd">Introduce tu contraseña</label>
-              <div class="invalid-feedback">
-                Contrase&tilden;a equivocada 
+              <div class="form-floating w-75 mb-3 m-auto">
+                <input type="email" name="correo" id="correo" placeholder="x" required="true" 
+                  class="form-control form-control-lg fs-3 fw-bolder text-center"/>
+                <label for="correo">Introduce tu correo</label>
               </div>
-            </div>
+
+              <div class="form-floating w-75 mt-3 m-auto">
+                <input type="password" name="pwd" id="pwd" placeholder="x" required="true"
+                  class="form-control form-control-lg fs-3 fw-bolder text-center"/>
+                <label for="pwd">Introduce tu contraseña</label>
+              </div>
+
+            </fieldset>
 
             <div class="text-center mt-5">
               <button type="submit" class="btn btn-primary btn-lg w-50 m-auto">

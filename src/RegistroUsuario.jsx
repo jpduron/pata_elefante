@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-//import 'bootstrap/dist/css/bootstrap.min.css';
+//import 'bootstrap/dist/css/bootstrap.min.css'; //se llama por link
 
 function RegistroUsuario() {
   const [nombre, setNombre] = useState('');
@@ -10,7 +10,10 @@ function RegistroUsuario() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // Aquí iría tu lógica de registro
+    
+    //20250506 aqui debo incluir la lógica para enviar datos al servidor
+    // o usar una API para registrar al usuario.
+
     const registroExitoso = true; // Simulación
     if (registroExitoso) {
       navigate('/');

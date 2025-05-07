@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Inicio from './Inicio';
 import RegistroUsuario from './RegistroUsuario.jsx';
 import Login from './Login';
-//import 'bootstrap/dist/css/bootstrap.min.css';
+//import 'bootstrap/dist/css/bootstrap.min.css'; //se llama por link
 
 function App() {
   return (

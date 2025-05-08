@@ -6,21 +6,53 @@ function RegistroUsuario() {
   const [nombre, setNombre] = useState('');
   const [correo, setCorreo] = useState('');
   const [contrasena, setContrasena] = useState('');
+  //const [datosRespuesta, setDatosRespuesta] = useState(null);
+  //const [error, setError] = useState(null);
   const navigate = useNavigate();
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
+    let registroExitoso = true;
+    /*const datos = {
+      fn: "pnu",
+      nombre: nombre,
+      email: correo,
+      password: contrasena
+    };
+
     //20250506 aqui debo incluir la lógica para enviar datos al servidor
     // o usar una API para registrar al usuario.
+    //20250507 se agrega la lógica de registro simulad
+    
+    const opciones = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(datos)
+    };
 
-    const registroExitoso = true; // Simulación
+    try {
+      const respuesta = await fetch('localhost/pata_elefante/backend/usuario_clae.php', opciones);
+      const resultado = await respuesta.json();
+      setDatosRespuesta(resultado);
+      setError(null);
+      console.log('Respuesta del servidor:', resultado);
+
+    } catch (error) {
+      setError(error);
+      setDatosRespuesta(null);
+      console.error('Error al hacer la llamada POST:', error);
+      registroExitoso = false;
+    } 
+*/
     if (registroExitoso) {
       navigate('/');
       console.log('Registro exitoso. Redirigiendo al índice.');
-      setNombre('');
-      setCorreo('');
-      setContrasena('');
+      event.target.nombre.value = '';
+      event.target.email.value = '';
+      event.target.password.value = '';
     } else {
       console.log('Error en el registro.');
     }

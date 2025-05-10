@@ -6,14 +6,71 @@ function RegistroUsuario() {
   const [nombre, setNombre] = useState('');
   const [correo, setCorreo] = useState('');
   const [contrasena, setContrasena] = useState('');
+  const [confirmaContrasena, setConfirmaContrasena] = useState('');
+  const [confirmaContrasenaError, setConfirmaContrasenaError] = useState('');
+  const [contrasenaError, setContrasenaError] = useState('');
+
   //const [datosRespuesta, setDatosRespuesta] = useState(null);
   //const [error, setError] = useState(null);
   const navigate = useNavigate();
   
+  //20250508 se agrega la validación de contraseña
+  const validatePasswordInternal = (pass) => {
+    let error = '';
+    if (pass.length < 8) {
+      error = 'La contraseña debe tener al menos 8 caracteres.';
+    } else if (!/[A-Z]/.test(pass)) {
+      error = 'Debe contener al menos una mayúscula.';
+    } else if (!/[a-z]/.test(pass)) {
+      error = 'Debe contener al menos una minúscula.';
+    } else if (!/[0-9]/.test(pass)) {
+      error = 'Debe contener al menos un número.';
+    }
+    setContrasenaError(error);
+    return !error;
+  };
+
+  const handleContrasenaChange = (e) => {
+    const newPassword = e.target.value;
+    setContrasena(newPassword);
+    validatePasswordInternal(newPassword);
+    if (confirmaContrasena) { // Validar confirmación si ya se escribió algo
+        if (newPassword !== confirmaContrasena) {
+          setConfirmaContrasenaError('Las contraseñas no coinciden.');
+        } else {
+          setConfirmaContrasenaError('');
+        }
+    }
+  };
+
+  const handleConfirmaContrasenaChange = (e) => {
+    const newConfirmPassword = e.target.value;
+    setConfirmaContrasena(newConfirmPassword);
+    if (contrasena !== newConfirmPassword) {
+      setConfirmaContrasenaError('Las contraseñas no coinciden.');
+    } else {
+      setConfirmaContrasenaError('');
+    }
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     let registroExitoso = true;
+
+    const isPasswordValid = validatePasswordInternal(contrasena);
+    const doPasswordsMatch = contrasena === confirmaContrasena;
+
+    if (!doPasswordsMatch && !confirmaContrasenaError) {
+        setConfirmaContrasenaError('Las contraseñas no coinciden.');
+    }
+
+    if (isPasswordValid && doPasswordsMatch) {
+      console.log('Formulario enviado exitosamente', { contrasena });
+      // Aquí lógica para enviar los datos al backend
+    } else {
+      console.log('Error en el formulario');
+    }
+
     /*const datos = {
       fn: "pnu",
       nombre: nombre,
@@ -97,9 +154,22 @@ function RegistroUsuario() {
                     className="form-control"
                     id="contrasena"
                     value={contrasena}
-                    onChange={(e) => setContrasena(e.target.value)}
+                    onChange={(e) => handleContrasenaChange(e)}
                     required
                   />
+                  {contrasenaError && <p style={{ color: 'red' }}>{contrasenaError}</p>}
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="confirmaContrasena" className="form-label">Confirma Contraseña</label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="confirmaContrasena"
+                    value={confirmaContrasena}
+                    onChange={(e) => handleConfirmaContrasenaChange(e)}
+                    required
+                  />
+                  {confirmaContrasenaError && <p style={{ color: 'red' }}>{confirmaContrasenaError}</p>}
                 </div>
                 <button type="submit" className="btn btn-primary">Registrarse</button>
               </form>
